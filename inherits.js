@@ -17,6 +17,7 @@ function Dog(name, color) {
 	this.color = color;
 };
 Dog.inherits(Animal);
+console.log(Dog.prototype instanceof Animal);
 
 Dog.prototype.fetch = function(){
 	console.log(this.name + " fetches!");
@@ -31,4 +32,3 @@ cat = new Animal("Gizmo");
 cat.speak();
 //cat.fetch();
 
-console.log(Dog.prototype instanceof Animal);
