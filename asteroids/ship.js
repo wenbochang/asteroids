@@ -17,13 +17,16 @@
 	}
 
 	Ship.prototype.fireBullet = function() {
+		if (this.vel == [0, 0]) {
+			return false; //don't fire bullet if ship is not moving
+		}
 		var vx = this.vel[0];
 		var vy = this.vel[1];
 		var shipSpeed = Math.sqrt(vx * vx + vy * vy);
 		var dir = [vx/shipSpeed, vy/shipSpeed];
 		var bulletSpeed = shipSpeed * 2;
 		var bulletVel = [dir[0]*bulletSpeed, dir[1]*bulletSpeed];
-		var bullet = new Asteroids.Bullet(this.pos, bulletVel);
+		var bullet = new Asteroids.Bullet([this.pos[0], this.pos[1]], bulletVel);
 		return bullet;
 	}
 

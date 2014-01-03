@@ -9,6 +9,6 @@
 	Bullet.COLOR = "white";
 	Bullet.RADIUS = 3;
 
-	Bullet.inherits(MovingObject);
+	Bullet.inherits(Asteroids.MovingObject);
 
 })(this);

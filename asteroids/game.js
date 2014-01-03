@@ -12,6 +12,8 @@
 		var vel = [0, 0];
 		this.ship = new Asteroids.Ship(pos, vel);
 		this.bindKeyHandlers();
+
+		this.bullets = [];
 	};
 
 	Game.DIM_X = 500;
@@ -33,6 +35,9 @@
 			a.draw(ctx);
 		});
 		this.ship.draw(ctx);
+		this.bullets.forEach(function(b) {
+			b.draw(ctx);
+		});
 	};
 
 	Game.prototype.move = function() {
@@ -40,6 +45,9 @@
 			a.move();
 		});
 		this.ship.move();
+		this.bullets.forEach(function(b) {
+			b.move();
+		});
 	};
 
 	Game.prototype.step = function() {
@@ -70,11 +78,20 @@
 	};
 
 	Game.prototype.bindKeyHandlers = function() {
+		game = this;
 		ship = this.ship;
 		key('a', function(){ ship.power([-1,0]) });
 		key('d', function(){ ship.power([1,0]) });
 		key('w', function(){ ship.power([0,-1]) });
 		key('s', function(){ ship.power([0,1]) });
+		key('space', function(){ game.fireBullet() });
+	};
+
+	Game.prototype.fireBullet = function() {
+		var bullet = this.ship.fireBullet();
+		if (bullet) {
+			this.bullets.push(bullet);
+		}
 	};
 
 })(this);
